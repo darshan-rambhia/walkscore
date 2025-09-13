@@ -27,3 +27,8 @@ createRoot(document.getElementById('root')!).render(
     </ThemeProvider>
   </StrictMode>
 );
+
+// Lazy-load web vitals only in production builds
+if (import.meta.env.PROD) {
+  import('./webVitals.ts').then(m => m.initWebVitals()).catch(() => {});
+}
