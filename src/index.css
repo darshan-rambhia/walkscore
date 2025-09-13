@@ -1,0 +1,46 @@
+/* WalkScore global styles */
+:root { --brand-bg:#0d2f52; --brand-accent:#145b99; --border:#d5dee7; --radius:6px; }
+* { box-sizing:border-box; }
+body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:#f5f8fa; color:#132433; }
+a { color: var(--brand-accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+.app-header, .app-footer { background: var(--brand-bg); color:#fff; padding:.75rem 1rem; }
+.logo { font-weight:600; font-size:1.05rem; color:#fff; }
+main { padding:1rem; max-width:1180px; margin:0 auto; }
+.page h1 { margin-top:0; font-size:1.9rem; }
+
+/* Form */
+.address-search { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1rem; }
+.address-search input { flex:1; min-width:250px; padding:.55rem .65rem; font-size:1rem; border:1px solid var(--border); border-radius:var(--radius); background:#fff; }
+.address-search button { background:var(--brand-accent); color:#fff; border:1px solid var(--brand-accent); padding:.6rem 1.1rem; border-radius:var(--radius); cursor:pointer; font-weight:500; }
+.address-search button:disabled { opacity:.6; cursor:progress; }
+.error { color:#c62828; font-size:.9rem; width:100%; }
+
+/* History */
+.search-history { margin-top:1.25rem; }
+.search-history h2 { margin:.25rem 0 .5rem; font-size:1.1rem; }
+.search-history ul { list-style:none; padding:0; margin:0; display:grid; gap:.4rem; }
+.search-history button { background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:.45rem .7rem; cursor:pointer; text-align:left; width:100%; }
+.search-history button:hover { background:#eef4f9; }
+
+/* Scores */
+.scores-panel { background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:.75rem 1rem; margin:1rem 0; }
+.scores-panel h2 { margin:.2rem 0 .6rem; font-size:1.15rem; }
+.scores-panel ul { margin:0; padding:0; list-style:none; display:grid; gap:.35rem; }
+
+/* Amenities */
+.amenity-list { background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:.75rem 1rem; margin:1rem 0; }
+.amenity-list h2 { margin:.2rem 0 .6rem; font-size:1.15rem; }
+.amenity-list ul { list-style:none; margin:0; padding:0; max-height:300px; overflow:auto; display:grid; gap:.35rem; }
+.amenity-list li { font-size:.95rem; }
+
+/* Map */
+.map-wrapper { margin:1rem 0; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff; }
+
+/* Layout on wide screens */
+@media (min-width: 980px) {
+  .insights-page { display:grid; grid-template-columns: 1fr 320px; gap:1.25rem; align-items:start; }
+  .map-wrapper { grid-column:1 / 2; }
+  .scores-panel, .amenity-list { margin:0; }
+}
