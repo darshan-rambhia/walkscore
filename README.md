@@ -3,7 +3,7 @@
 Live site: <https://walkscore.vercel.app>
 Lightweight, client-only walkability explorer built with open geodata. Enter an address, view nearby amenities, heuristic walking & driving scores, and an Urban / Mixed / Suburban classification.
 
-### Data Sources
+## Data Sources
 
 - Geocoding: Nominatim (OpenStreetMap)
 - Amenities: Overpass API
@@ -119,6 +119,21 @@ Key: `wi_history_v1`
 - Marker clustering
 - Category weighting matrix
 - Offline/IndexedDB cache
+
+## Sharing & Growth
+
+You can generate a shareable permalink for any scored location from the Insights page using the "Copy Share Link" button. The link encodes only coordinates (and optional label) as query params; amenity data & scores are recomputed on load for freshness.
+
+Example format: `https://walkscore.vercel.app/?lat=40.758000&lon=-73.985500&label=Times%20Sq`
+
+Workflow:
+
+1. User opens the link.
+2. The app detects `lat`/`lon` params.
+3. It geocodes label (if present) or uses raw coords.
+4. Fetches amenities + computes scores (same pipeline as normal search).
+
+This keeps URLs stable, minimal, and future‑proof (no versioned score blobs). Potential future extension: include a scoring version `v=1` for backward compatibility after formula changes.
 
 ## License
 

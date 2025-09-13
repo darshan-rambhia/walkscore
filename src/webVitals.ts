@@ -1,5 +1,4 @@
-import { onCLS, onFID, onLCP, onINP, onFCP, onTTFB, type Metric } from 'web-vitals';
-import { logger } from './utils/logger.ts';
+import { onCLS, onLCP, onINP, onFCP, onTTFB, type Metric } from 'web-vitals';
 
 /**
  * Initialize Web Vitals collection. Results are logged and sent via beacon
@@ -8,28 +7,21 @@ import { logger } from './utils/logger.ts';
  * to POST to our own analytics endpoint.
  */
 export function initWebVitals() {
-  const log = logger.child('perf:vitals');
-
   function report(metric: Metric) {
     // Log structured metric
-    log.info('metric', {
+    const coarse: Record<string, unknown> = {
       name: metric.name,
       id: metric.id,
       value: metric.value,
-      rating: (metric as any).rating,
       delta: metric.delta,
-      navigationType: (metric as any).navigationType
-    });
-
-    // Example: custom beacon (disabled by default)
-    // if (navigator.sendBeacon) {
-    //   const body = JSON.stringify(metric);
-    //   navigator.sendBeacon('/analytics', body);
-    // }
+    };
+    // Optional extra properties if present (not on Metric base type in typings)
+  const maybeAny = metric as unknown as { rating?: unknown; navigationType?: unknown };
+  if (maybeAny.rating) coarse.rating = maybeAny.rating;
+  if (maybeAny.navigationType) coarse.navigationType = maybeAny.navigationType;
   }
 
   onCLS(report);
-  onFID(report);
   onLCP(report);
   onINP(report);
   onFCP(report);

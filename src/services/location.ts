@@ -113,7 +113,8 @@ export async function fetchAmenities(
         })
         .filter(Boolean) as Amenity[];
     } catch (err) {
-      log.error('endpoint error', { endpoint: ep, error: (err as any)?.message || err });
+      const msg = err instanceof Error ? err.message : String(err);
+      log.error('endpoint error', { endpoint: ep, error: msg });
       return [];
     }
   }
