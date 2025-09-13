@@ -1,13 +1,6 @@
-# WalkScore (Walking Insights)# WalkScore
+# WalkScore
 
-Live site: <https://walkscore.vercel.app> quick, explainable walkability & drive accessibility insights for any address using open geographic data.
-
-A client-only React + TypeScript application that lets you enter an address and receive walkability insights: nearby amenities, heuristic walking & driving scores, and an urban/mixed/suburban classification. All data is fetched directly from open APIs (no backend):## Live App
-
-## WalkScore (Walking Insights)
-
-Live site: <https://walkscore.vercel.app/>
-
+Live site: <https://walkscore.vercel.app>
 Lightweight, client-only walkability explorer built with open geodata. Enter an address, view nearby amenities, heuristic walking & driving scores, and an Urban / Mixed / Suburban classification.
 
 ### Data Sources
