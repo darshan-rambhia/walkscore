@@ -136,12 +136,13 @@ export async function fetchAmenities(
 }
 
 function haversineMeters(lat1: number, lon1: number, lat2: number, lon2: number) {
-  const R = 6371e3;
-  const φ1 = (lat1 * Math.PI) / 180;
-  const φ2 = (lat2 * Math.PI) / 180;
-  const dφ = ((lat2 - lat1) * Math.PI) / 180;
-  const dλ = ((lon2 - lon1) * Math.PI) / 180;
-  const a = Math.sin(dφ / 2) ** 2 + Math.cos(φ1) * Math.cos(φ2) * Math.sin(dλ / 2) ** 2;
+  const R = 6371e3; // Radius of earth in meters. Use 3956 for miles
+  const toRadians = (deg: number) => (deg * Math.PI) / 180;
+  const lat1InRadians = toRadians(lat1);
+  const lat2InRadians = toRadians(lat2);
+  const dLat = toRadians(lat2 - lat1);
+  const dLon = toRadians(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1InRadians) * Math.cos(lat2InRadians) * Math.sin(dLon / 2) ** 2;
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }

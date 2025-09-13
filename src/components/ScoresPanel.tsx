@@ -50,6 +50,21 @@ export default function ScoresPanel({ scores }: Props) {
         />
       </Box>
 
+      <Box>
+        <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+          <Typography variant="body2" color="text.secondary">Urban Index</Typography>
+          <Typography variant="h6" color={getScoreColor(scores.urbanSuburbanIndex) + '.main'}>
+            {scores.urbanSuburbanIndex}
+          </Typography>
+        </Box>
+        <LinearProgress
+          variant="determinate"
+            value={scores.urbanSuburbanIndex}
+            color={getScoreColor(scores.urbanSuburbanIndex)}
+            sx={{ height: 8, borderRadius: 4 }}
+        />
+      </Box>
+
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="body2" color="text.secondary">Area Type</Typography>
         <Chip 
