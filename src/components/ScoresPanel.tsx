@@ -5,7 +5,7 @@ interface Props {
   scores: ScoreBreakdown;
 }
 
-export default function ScoresPanel({ scores }: Props) {
+export default function ScoresPanel({ scores }: Readonly<Props>) {
   const getScoreColor = (score: number): 'success' | 'warning' | 'error' => {
     if (score >= 70) return 'success';
     if (score >= 40) return 'warning';

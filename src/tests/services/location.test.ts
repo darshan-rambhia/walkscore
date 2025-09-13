@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { geocodeAddress, fetchAmenities, buildAmenityRegex, needsAmenitiesFetch } from '../../services/location';
 
 // Mock fetch
-global.fetch = vi.fn();
+globalThis.fetch = vi.fn();
 
 describe('location service', () => {
   beforeEach(() => {
@@ -17,9 +17,9 @@ describe('location service', () => {
         lon: '-74.0060'
       }];
 
-      (global.fetch as any).mockResolvedValueOnce({
+      (globalThis.fetch as any).mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve(mockResponse)
+        json: () => Promise.resolve(mockResponse),
       });
 
       const result = await geocodeAddress('New York');
@@ -32,8 +32,8 @@ describe('location service', () => {
     });
 
     it('should return null for failed request', async () => {
-      (global.fetch as any).mockResolvedValueOnce({
-        ok: false
+      (globalThis.fetch as any).mockResolvedValueOnce({
+        ok: false,
       });
 
       const result = await geocodeAddress('Invalid Address');
@@ -41,9 +41,9 @@ describe('location service', () => {
     });
 
     it('should return null for empty response', async () => {
-      (global.fetch as any).mockResolvedValueOnce({
+      (globalThis.fetch as any).mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve([])
+        json: () => Promise.resolve([]),
       });
 
       const result = await geocodeAddress('No Results');
@@ -51,7 +51,9 @@ describe('location service', () => {
     });
 
     it('should handle network errors', async () => {
-      (global.fetch as any).mockRejectedValueOnce(new Error('Network error'));
+      (globalThis.fetch as any).mockRejectedValueOnce(
+        new Error("Network error")
+      );
 
       await expect(geocodeAddress('Test Address')).rejects.toThrow('Network error');
     });
@@ -83,7 +85,7 @@ describe('location service', () => {
         ]
       };
 
-      (global.fetch as any).mockResolvedValueOnce({
+      (globalThis.fetch as any).mockResolvedValueOnce({
         ok: true,
         json: () => Promise.resolve(mockOverpassResponse)
       });
@@ -125,9 +127,9 @@ describe('location service', () => {
         ]
       };
 
-      (global.fetch as any).mockResolvedValueOnce({
+      (globalThis.fetch as any).mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve(mockOverpassResponse)
+        json: () => Promise.resolve(mockOverpassResponse),
       });
 
       const result = await fetchAmenities(40.7580, -73.9855);
@@ -136,9 +138,9 @@ describe('location service', () => {
     });
 
     it('should return empty array on API failure', async () => {
-      (global.fetch as any).mockResolvedValueOnce({
+      (globalThis.fetch as any).mockResolvedValueOnce({
         ok: false,
-        status: 500
+        status: 500,
       });
 
       const result = await fetchAmenities(40.7580, -73.9855);
